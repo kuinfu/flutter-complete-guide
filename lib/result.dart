@@ -34,7 +34,8 @@ class Result extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
         ),
-        ElevatedButton(onPressed: () => resetHandler(), child: Text('Restart!'))
+        TextButton(
+            onPressed: () => resetHandler(), child: Text('Reset Quiz!'))
       ],
     );
   }
