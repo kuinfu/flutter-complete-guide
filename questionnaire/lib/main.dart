@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_complete_guide/question.dart';
 
-import './question.dart';
+import 'question.dart';
 import './answer.dart';
-import './result.dart';
+import 'result.dart';
 import 'quiz.dart';
 
 void main() {
