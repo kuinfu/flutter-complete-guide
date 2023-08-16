@@ -14,7 +14,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Personal Expenses',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
       home: MyHomePage(),
@@ -51,14 +50,12 @@ class MyHomePage extends StatelessWidget {
         title: Text('Expenses'),
       ),
       body: Column(
-        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        // crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Container(
             width: double.infinity,
             child: Card(
-              elevation: 5,
-              color: Colors.blue,
+              // elevation: 5,
               child: Text(
                 'charts',
               ),
@@ -67,7 +64,35 @@ class MyHomePage extends StatelessWidget {
           Column(
               children: _transactions
                   .map((e) => Card(
-                        child: Text(e.title),
+                        child: Row(
+                          children: [
+                            Container(
+                              margin: EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 15),
+                              padding: EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: Colors.purple,
+                                  width: 2,
+                                ),
+                              ),
+                              child: Text(
+                                '\$${e.amount}',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                  color: Colors.purple,
+                                ),
+                              ),
+                            ),
+                            Column(
+                              children: [
+                                Text('${e.title}'),
+                                Text('${e.date}'),
+                              ],
+                            )
+                          ],
+                        ),
                       ))
                   .toList()),
         ],
