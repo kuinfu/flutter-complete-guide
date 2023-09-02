@@ -11,7 +11,7 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 300,
+        height: 500,
         //ListView.builder()仅仅会绘制屏幕上可见区域,更适合大数据量的做法
         child: ListView.builder(
           itemBuilder: (ctx, index) {

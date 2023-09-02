@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:personal_expenses/widgets/new_transaction.dart';
 
-import 'widgets/user_transactions.dart';
+import 'models/transaction.dart';
+import 'widgets/transaction_list.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,12 +23,58 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  // late String inputTitle;
-  // late String inputAmount;
+class MyHomePage extends StatefulWidget {
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
 
-  // final titleController = TextEditingController();
-  // final amountController = TextEditingController();
+class _MyHomePageState extends State<MyHomePage> {
+  // late String inputTitle;
+
+  final List<Transaction> _userTransactions = [
+    Transaction(
+        id: DateTime.now().toString(),
+        title: 'Shoes',
+        amount: 10.3,
+        date: DateTime.now()),
+    Transaction(
+        id: DateTime.now().toString(),
+        title: 'Eating',
+        amount: 80,
+        date: DateTime.now()),
+    Transaction(
+        id: DateTime.now().toString(),
+        title: 'Weakly Funny',
+        amount: 130.99,
+        date: DateTime.now()),
+  ];
+
+  void _addNewTransaction(String title, double amount) {
+    final newTx = Transaction(
+      id: DateTime.now().toString(),
+      title: title,
+      amount: amount,
+      date: DateTime.now(),
+    );
+
+    setState(() {
+      _userTransactions.add(newTx);
+    });
+  }
+
+  void _startNewTransaction(BuildContext ctx) {
+    //此处的输入会有一个问题,在输入标题或者金额的时候,另一个输入框会鞋自动清零
+    //原因在于NewTransaction是一个无状态的小部件,解决方法将其变成一个有状态的部件
+    showModalBottomSheet(
+        context: ctx,
+        builder: (bCtx) {
+          return GestureDetector(
+            child: NewTransaction(_addNewTransaction),
+            onTap: () {},
+            behavior: HitTestBehavior.opaque,
+          );
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +84,14 @@ class MyHomePage extends StatelessWidget {
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text('Expenses'),
+        actions: [
+          IconButton(
+            onPressed: () {
+              _startNewTransaction(context);
+            },
+            icon: Icon(Icons.add),
+          )
+        ],
       ),
       //防止出现黄色警告
       body: SingleChildScrollView(
@@ -51,9 +107,16 @@ class MyHomePage extends StatelessWidget {
                 ),
               ),
             ),
-            UserTransactions(),
+            TransactionList(_userTransactions),
           ],
         ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          _startNewTransaction(context);
+        },
+        child: Icon(Icons.add),
       ),
     );
   }
