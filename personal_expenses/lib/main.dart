@@ -60,21 +60,21 @@ class _MyHomePageState extends State<MyHomePage> {
   // late String inputTitle;
 
   final List<Transaction> _userTransactions = [
-    Transaction(
-        id: DateTime.now().toString(),
-        title: 'Shoes',
-        amount: 10.3,
-        date: DateTime.now()),
-    Transaction(
-        id: DateTime.now().toString(),
-        title: 'Eating',
-        amount: 80,
-        date: DateTime.now()),
-    Transaction(
-        id: DateTime.now().toString(),
-        title: 'Weakly Funny',
-        amount: 130.99,
-        date: DateTime.now()),
+    // Transaction(
+    //     id: DateTime.now().toString(),
+    //     title: 'Shoes',
+    //     amount: 10.3,
+    //     date: DateTime.now()),
+    // Transaction(
+    //     id: DateTime.now().toString(),
+    //     title: 'Eating',
+    //     amount: 80,
+    //     date: DateTime.now()),
+    // Transaction(
+    //     id: DateTime.now().toString(),
+    //     title: 'Weakly Funny',
+    //     amount: 130.99,
+    //     date: DateTime.now()),
   ];
 
   void _addNewTransaction(String title, double amount) {
